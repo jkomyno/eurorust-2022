@@ -4,6 +4,7 @@ members = [
   "playground-wasm",
   "demo-panic",
   "demo-serde-wasm",
+  "demo-tsify-wasm",
 
   "demo-cli",
 ]

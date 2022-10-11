@@ -1,0 +1,16 @@
+[package]
+name = "demo-tsify-wasm"
+version = "0.1.0"
+edition = "2021"
+authors = ["Alberto Schiabel <alberto.schiabel@gmail.com>"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+crate-type = ["rlib", "cdylib"]
+name = "demo_tsify_wasm"
+
+[dependencies]
+tsify = { version = "0.4.2", features = ["json"] }
+wasm-bindgen = { version = "0.2.83" }
+serde = { version = "1.0.144", features = ["derive"] }
