@@ -1,0 +1,18 @@
+[package]
+name = "schema-parser-wasm"
+version = "0.1.0"
+edition = "2021"
+authors = ["Alberto Schiabel <alberto.schiabel@gmail.com>"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+crate-type = ["rlib", "cdylib"]
+name = "schema_parser_wasm"
+
+[dependencies]
+tsify = { version = "0.4.2", features = ["json"] }
+wasm-bindgen = { version = "0.2.83" }
+serde = { version = "1.0.144", features = ["derive"] }
+serde_json = { version = "1.0.85" }
+schema-parser = { path = "../schema-parser", features = ["wasm"] }

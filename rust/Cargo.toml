@@ -5,6 +5,8 @@ members = [
   "demo-panic",
   "demo-serde-wasm",
   "demo-tsify-wasm",
+  "schema-parser",
+  "schema-parser-wasm",
 
   "demo-cli",
 ]
