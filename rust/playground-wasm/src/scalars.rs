@@ -5,7 +5,7 @@ use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
 pub struct ScalarParams {
-  pub Toggle: bool,
-  pub Id: u32,
-  pub Letter: char,
+  pub toggle: bool,
+  pub id: u32,
+  pub letter: char,
 }
