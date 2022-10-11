@@ -2,4 +2,5 @@
 
 members = [
   "playground-wasm",
+  "demo-panic",
 ]
