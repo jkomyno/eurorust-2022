@@ -10,4 +10,4 @@ about = "A CLI that uses a parser for a subset of the schema language."
 [dependencies]
 clap = { version = "3.2.22", features = ["derive", "suggestions"] }
 demo-panic = { path = "../demo-panic", features = [] }
-# schema-parser = { path = "../schema-parser" }
+demo-serde-wasm = { path = "../demo-serde-wasm" }

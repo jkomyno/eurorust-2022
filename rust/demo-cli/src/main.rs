@@ -16,6 +16,9 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum Commands {
+  #[clap(about = "Print an example struct serialized via serde")]
+  Serde,
+
   #[clap(about = "Parse a schema file")]
   Parse(ParseCmd),
 
@@ -63,6 +66,12 @@ fn handle_parse_cmd(cmd: ParseCmd) -> std::io::Result<()> {
   Ok(())
 }
 
+fn handle_demo_serde_cmd() -> std::io::Result<()> {
+  let schema = demo_serde_wasm::example_schema();
+  println!("schema:\n{:?}\n", schema);
+  Ok(())
+}
+
 fn handle_panic_cmd(cmd: PanicCmd) -> std::io::Result<()> {
   demo_panic::trigger_panic(cmd.message);
   Ok(())
@@ -72,6 +81,7 @@ fn main() -> std::io::Result<()> {
   let cmd = Cli::parse();
 
   match cmd {
+    Cli { command: Commands::Serde } => handle_demo_serde_cmd(),
     Cli { command: Commands::Parse(cmd) } => handle_parse_cmd(cmd),
     Cli { command: Commands::Panic(cmd) } => handle_panic_cmd(cmd),
   }
