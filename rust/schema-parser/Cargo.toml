@@ -17,3 +17,7 @@ wasm = ["tsify", "wasm-bindgen"]
 wasm-bindgen = { version = "0.2.83", optional = true }
 tsify = { version = "0.4.2", optional = true, features = ["json"] }
 serde = { version = "1.0.144", features = ["derive"] }
+nom = { version = "7.1.1" }
+
+[dev-dependencies]
+paste = "1.0.9"

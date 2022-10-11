@@ -1,3 +1,4 @@
+#![allow(clippy::derive_partial_eq_without_eq)]
 use serde::{Deserialize, Serialize};
 
 #[cfg(feature = "wasm")]
@@ -6,7 +7,8 @@ use tsify::Tsify;
 #[cfg(feature = "wasm")]
 use wasm_bindgen::prelude::*;
 
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+// Clone is needed for parser macros in schema_parser::parser::parser.
+#[derive(Debug, PartialEq, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "lowercase")]
 #[cfg_attr(feature = "wasm", derive(Tsify), tsify(into_wasm_abi, from_wasm_abi))]
 pub enum Provider {

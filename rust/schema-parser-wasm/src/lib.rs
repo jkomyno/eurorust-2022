@@ -3,15 +3,14 @@ use serde::Serialize;
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen(js_name = exampleSchema)]
-pub fn example_schema_wasm(input: String) -> Result<SchemaAST, JsError> {
+pub fn example_schema_wasm() -> Result<SchemaAST, JsError> {
   let schema = schema_parser::example_schema();
   Ok(schema)
 }
 
 #[wasm_bindgen(js_name = parseSchema)]
 pub fn parse_schema_wasm(input: String) -> Result<SchemaAST, JsError> {
-  // parse_schema(&input).map_err(|err| to_js_error(&err))
-  Err(to_js_error(&String::from("err")))
+  schema_parser::parse_schema(input).map_err(|err| to_js_error(&err))
 }
 
 fn to_js_error<T>(err: &T) -> JsError
