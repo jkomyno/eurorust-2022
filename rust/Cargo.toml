@@ -3,6 +3,7 @@
 members = [
   "playground-wasm",
   "demo-panic",
+  "demo-serde-wasm",
 
   "demo-cli",
 ]
