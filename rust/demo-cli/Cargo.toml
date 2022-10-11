@@ -11,4 +11,4 @@ about = "A CLI that uses a parser for a subset of the schema language."
 clap = { version = "3.2.22", features = ["derive", "suggestions"] }
 demo-panic = { path = "../demo-panic", features = [] }
 demo-serde-wasm = { path = "../demo-serde-wasm" }
-demo_tsify_wasm = { path = "../demo_tsify_wasm" }
+demo-tsify-wasm = { path = "../demo-tsify-wasm" }
