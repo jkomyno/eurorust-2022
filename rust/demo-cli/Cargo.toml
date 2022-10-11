@@ -1,0 +1,13 @@
+[package]
+name = "demo-cli"
+version = "0.1.0"
+edition = "2021"
+authors = ["Alberto Schiabel <alberto.schiabel@gmail.com>"]
+about = "A CLI that uses a parser for a subset of the schema language."
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+clap = { version = "3.2.22", features = ["derive", "suggestions"] }
+demo-panic = { path = "../demo-panic", features = [] }
+# schema-parser = { path = "../schema-parser" }
