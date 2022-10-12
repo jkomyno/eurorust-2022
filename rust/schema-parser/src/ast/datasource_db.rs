@@ -1,4 +1,5 @@
-#![allow(clippy::derive_partial_eq_without_eq)]
+use std::fmt;
+
 use serde::{Deserialize, Serialize};
 
 #[cfg(feature = "wasm")]
@@ -8,7 +9,7 @@ use tsify::Tsify;
 use wasm_bindgen::prelude::*;
 
 // Clone is needed for parser macros in schema_parser::parser::parser.
-#[derive(Debug, PartialEq, Clone, Serialize, Deserialize)]
+#[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "lowercase")]
 #[cfg_attr(feature = "wasm", derive(Tsify), tsify(into_wasm_abi, from_wasm_abi))]
 pub enum Provider {
@@ -36,8 +37,15 @@ impl From<&str> for Provider {
   }
 }
 
+impl fmt::Display for Provider {
+  fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+    let provider_as_str = serde_json::to_string(self).unwrap();
+    write!(f, "{}", provider_as_str)
+  }
+}
+
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
+#[serde(rename_all = "camelCase", tag = "kind", content = "value")]
 #[cfg_attr(feature = "wasm", derive(Tsify), tsify(into_wasm_abi, from_wasm_abi))]
 pub enum Url {
   Static(String),

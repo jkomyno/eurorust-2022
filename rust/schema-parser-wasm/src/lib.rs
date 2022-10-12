@@ -13,6 +13,11 @@ pub fn parse_schema_wasm(input: String) -> Result<SchemaAST, JsError> {
   schema_parser::parse_schema(input).map_err(|err| to_js_error(&err))
 }
 
+#[wasm_bindgen(js_name = validateAST)]
+pub fn validate_schema_wasm(ast: SchemaAST) -> Result<(), JsError> {
+  schema_parser::validate_ast(&ast).map_err(|err| to_js_error(&err))
+}
+
 fn to_js_error<T>(err: &T) -> JsError
 where
   T: Serialize + ?Sized,
