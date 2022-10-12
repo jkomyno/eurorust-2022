@@ -2,6 +2,12 @@
 
 > Accompanying code for the talk I presented at EuroRust 2022 in Berlin, Germany
 
+<p>
+  <a href="https://github.com/jkomyno/react-native-user-inactivity/blob/master/LICENSE">
+    <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" target="_blank" />
+  </a>
+</p>
+
 ## Abstract
 
 Although Rust code can supposedly run in JS runtimes via WebAssembly, concepts like serialization, panic handling, and type-safety aren’t supported out of the box. Using a parser written in Rust and consumed by Node.js, we’ll discuss limitations and alternatives to guide you through a Wasm project.
@@ -22,13 +28,13 @@ In this presentation, we will look at a language parser written in Rust, compile
 - `cargo update -p wasm-bindgen`
 - `cargo install -f wasm-bindgen-cli@0.2.83` (this version is important, as `wasm-bindgen-cli` doesn't yet follow semantic versioning. This version needs to match the version of the `wasm-bindgen` crate`)
 
-In [`./nodejs`]:
+In [`./nodejs`](./nodejs):
 
 - `npm install`
 
 ### Build
 
-In [`./rust`]:
+In [`./rust`](./rust):
 
 - Run unit tests:
 ```
@@ -48,7 +54,7 @@ cargo build --release
 
 ## What's in this repository
 
-In [`./rust`](rust):
+In [`./rust`](./rust):
 
 - `demo-cli`: a CLI binary that uses the `rlib` libraries of the other demo crates to parse and validate schemas, trigger example panics, and showing serialized data structures with different libraries.
 
@@ -61,3 +67,15 @@ In [`./rust`](rust):
 - `schema-parser`: library that defines a parser and a validator for a simple schema language inspired by [prisma](https://prisma.io). The data structures for the schema AST (Abstract Syntax Tree) are optionally serialized with `wasm-bindgen` + `tsify` via the `wasm` feature flag. `schema-parser` uses `nom` to parse the input.
 
 - `schema-parser-wasm`: WebAssembly bindings for the `schema-parser` library (which is installed with the `wasm` feature flag). It uses `serde-json` to convert custom structs in a JavaScript error when needed.
+
+## 👤 Author
+
+**Alberto Schiabel**
+
+* Twitter: [@jkomyno](https://twitter.com/jkomyno)
+* Twitter: [@jkomyno](https://github.com/jkomyno)
+
+## 📝 License
+
+Built with ❤️ by [Alberto Schiabel](https://github.com/jkomyno).
+This project is [MIT](https://github.com/jkomyno/eurorust-2022/blob/main/LICENSE) licensed.
