@@ -4,7 +4,6 @@ use std::{
 };
 
 use clap::{Parser, Subcommand};
-// use schema_parser::{parse_schema, trigger_panic};
 
 #[derive(Parser)]
 #[clap(name = "demo-cli")]
@@ -25,12 +24,21 @@ enum Commands {
   #[clap(about = "Parse a schema file")]
   Parse(ParseCmd),
 
+  #[clap(about = "Validate a schema file")]
+  Validate(ValidateCmd),
+
   #[clap(about = "Trigger a panic with a given message")]
   Panic(PanicCmd),
 }
 
 #[derive(Parser)]
 struct ParseCmd {
+  #[clap(long)]
+  schema: std::path::PathBuf,
+}
+
+#[derive(Parser)]
+struct ValidateCmd {
   #[clap(long)]
   schema: std::path::PathBuf,
 }
@@ -62,10 +70,39 @@ fn handle_parse_cmd(cmd: ParseCmd) -> std::io::Result<()> {
   let schema = schema_parser::parse_schema(schema_contents);
   println!("Schema parsed successfully!\n");
 
-  let schema = schema.unwrap();
-  println!("{:#?}", schema);
+  let ast = schema.unwrap();
+  println!("{:#?}", ast);
 
   Ok(())
+}
+
+fn handle_validate_cmd(cmd: ValidateCmd) -> std::io::Result<()> {
+  let schema_contents = read_schema(&cmd.schema);
+  if let Err(e) = schema_contents {
+    eprintln!("Error reading schema file: {}", e);
+    std::process::exit(1);
+  }
+
+  let schema_contents = schema_contents.unwrap();
+
+  println!("Parsing schema...");
+  let schema = schema_parser::parse_schema(schema_contents);
+  println!("Schema parsed successfully!\n");
+
+  let ast = schema.unwrap();
+
+  println!("Validating AST...");
+
+  match schema_parser::validate_ast(&ast) {
+    Ok(_) => {
+      println!("AST validated successfully!");
+      Ok(())
+    }
+    Err(e) => {
+      eprintln!("[rust:error]: {:?}", &e);
+      Err(std::io::Error::new(std::io::ErrorKind::InvalidData, "AST validation failed"))
+    }
+  }
 }
 
 fn handle_demo_serde_cmd() -> std::io::Result<()> {
@@ -92,6 +129,7 @@ fn main() -> std::io::Result<()> {
     Cli { command: Commands::Serde } => handle_demo_serde_cmd(),
     Cli { command: Commands::Tsify } => handle_demo_tsify_cmd(),
     Cli { command: Commands::Parse(cmd) } => handle_parse_cmd(cmd),
+    Cli { command: Commands::Validate(cmd) } => handle_validate_cmd(cmd),
     Cli { command: Commands::Panic(cmd) } => handle_panic_cmd(cmd),
   }
 }
