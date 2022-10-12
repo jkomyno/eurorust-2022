@@ -4,7 +4,7 @@
 use wasm_bindgen::prelude::*;
 
 struct RefT<'a> {
-  pub Description: &'a str,
+  pub description: &'a str,
 }
 
 #[wasm_bindgen]
