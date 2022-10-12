@@ -13,6 +13,12 @@ pub enum Provider {
   Postgres,
 }
 
+/// This gets typed as e.g.:
+///
+/// ```typescript
+/// { static: string } |
+/// { env: string }
+/// ```
 #[derive(Debug, Serialize, Deserialize, Tsify)]
 #[serde(rename_all = "camelCase")]
 #[tsify(into_wasm_abi, from_wasm_abi)]
@@ -21,21 +27,49 @@ pub enum Url {
   Env(String),
 }
 
-/// This gets serialized as e.g.:
+/// This gets typed as:
 ///
-/// ```json
+/// ```typescript
+/// ({ kind: 'static') & string) |
+/// ({ kind: 'env') & string)
+/// ```
+#[derive(Debug, Serialize, Deserialize, Tsify)]
+#[serde(rename_all = "camelCase", tag = "kind")]
+#[tsify(into_wasm_abi, from_wasm_abi)]
+pub enum UrlTag {
+  Static(String),
+  Env(String),
+}
+
+/// This gets typed as:
+///
+/// ```typescript
+/// { kind: 'static', value: string } |
+/// { kind: 'env', value: string }
+/// ```
+#[derive(Debug, Serialize, Deserialize, Tsify)]
+#[serde(rename_all = "camelCase", tag = "kind", content = "value")]
+#[tsify(into_wasm_abi, from_wasm_abi)]
+pub enum UrlTagContent {
+  Static(String),
+  Env(String),
+}
+
+/// This gets typed as:
+///
+/// ```typescript
 /// {
-///   "providers": ["sqlite", "postgres"],
-///   "shadowDatabaseUrl": {
-///     "env": "DATABASE_URL"
-///   },
-///   "id": null
+///   provider: 'sqlite' | 'postgres',
+///   shadow_database_url: { kind: 'static', value: string }
+///                      | { kind: 'env', value: string }
+///                      | null,
+///   id: number | null,
 /// }
 #[derive(Debug, Serialize, Deserialize, Tsify)]
 #[serde(rename_all = "camelCase")]
 #[tsify(into_wasm_abi, from_wasm_abi)]
 pub struct MiniSchema {
   pub providers: Vec<Provider>,
-  pub shadow_database_url: Option<Url>,
+  pub shadow_database_url: Option<UrlTagContent>,
   pub id: Option<u32>,
 }

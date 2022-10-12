@@ -1,4 +1,4 @@
-use ast::{MiniSchema, Provider, Url};
+use ast::{MiniSchema, Provider, UrlTagContent};
 use wasm_bindgen::prelude::*;
 
 pub mod ast;
@@ -6,7 +6,7 @@ pub mod ast;
 pub fn example_schema() -> MiniSchema {
   MiniSchema {
     providers: vec![Provider::SQLite, Provider::Postgres],
-    shadow_database_url: Some(Url::Env(String::from("DATABASE_URL"))),
+    shadow_database_url: Some(UrlTagContent::Env(String::from("DATABASE_URL"))),
     id: None,
   }
 }
