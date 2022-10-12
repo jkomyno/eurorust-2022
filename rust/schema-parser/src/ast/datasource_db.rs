@@ -45,7 +45,7 @@ impl fmt::Display for Provider {
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase", tag = "kind", content = "value")]
+#[serde(rename_all = "camelCase", tag = "_tag", content = "value")]
 #[cfg_attr(feature = "wasm", derive(Tsify), tsify(into_wasm_abi, from_wasm_abi))]
 pub enum Url {
   Static(String),

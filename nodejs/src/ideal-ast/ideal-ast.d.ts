@@ -1,16 +1,16 @@
 /* utils */
 
 type Option<T>
-  = { kind: 'some', value: T }
-  | { kind: 'none' }
+  = { _tag: 'some', value: T }
+  | { _tag: 'none' }
 
 /* datasource db */
 
 export type Provider = "postgres" | "cockroachdb" | "mysql" | "mariadb" | "sqlserver" | "sqlite" | "mongodb";
 
 export type Url
-  = { kind: 'static', value: string } // in Rust => Static(String)
-  | { kind: 'env', value: string }    // in Rust => Env(String)
+  = { _tag: 'static', value: string } // in Rust => Static(String)
+  | { _tag: 'env', value: string }    // in Rust => Env(String)
 
 export type DatasourceDb = {
   provider: Provider
@@ -21,7 +21,7 @@ export type DatasourceDb = {
 /* datasource */
 
 export type Datasource
-  = { kind: 'db', value: DatasourceDb }
+  = { _tag: 'db', value: DatasourceDb }
 
 /* schema */
 

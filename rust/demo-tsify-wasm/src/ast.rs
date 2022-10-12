@@ -30,11 +30,11 @@ pub enum Url {
 /// This gets typed as:
 ///
 /// ```typescript
-/// ({ kind: 'static') & string) |
-/// ({ kind: 'env') & string)
+/// ({ _tag: 'static') & string) |
+/// ({ _tag: 'env') & string)
 /// ```
 #[derive(Debug, Serialize, Deserialize, Tsify)]
-#[serde(rename_all = "camelCase", tag = "kind")]
+#[serde(rename_all = "camelCase", tag = "_tag")]
 #[tsify(into_wasm_abi, from_wasm_abi)]
 pub enum UrlTag {
   Static(String),
@@ -44,11 +44,11 @@ pub enum UrlTag {
 /// This gets typed as:
 ///
 /// ```typescript
-/// { kind: 'static', value: string } |
-/// { kind: 'env', value: string }
+/// { _tag: 'static', value: string } |
+/// { _tag: 'env', value: string }
 /// ```
 #[derive(Debug, Serialize, Deserialize, Tsify)]
-#[serde(rename_all = "camelCase", tag = "kind", content = "value")]
+#[serde(rename_all = "camelCase", tag = "_tag", content = "value")]
 #[tsify(into_wasm_abi, from_wasm_abi)]
 pub enum UrlTagContent {
   Static(String),
@@ -60,8 +60,8 @@ pub enum UrlTagContent {
 /// ```typescript
 /// {
 ///   provider: 'sqlite' | 'postgres',
-///   shadow_database_url: { kind: 'static', value: string }
-///                      | { kind: 'env', value: string }
+///   shadow_database_url: { _tag: 'static', value: string }
+///                      | { _tag: 'env', value: string }
 ///                      | null,
 ///   id: number | null,
 /// }

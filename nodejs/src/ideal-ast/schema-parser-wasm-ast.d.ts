@@ -3,8 +3,8 @@
 export type Provider = "postgres" | "cockroachdb" | "mysql" | "mariadb" | "sqlserver" | "sqlite" | "mongodb";
 
 export type Url
-  = { kind: "static", value: string }
-  | { kind: "env", value: string }
+  = { _tag: "static", value: string }
+  | { _tag: "env", value: string }
 
 export interface DatasourceDb {
   provider: Provider
@@ -15,7 +15,7 @@ export interface DatasourceDb {
 /* datasource */
 
 export type Datasource
-  = { kind: 'db', value: DatasourceDb }
+  = { _tag: 'db', value: DatasourceDb }
 
 /* schema */
 
