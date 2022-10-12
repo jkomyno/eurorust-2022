@@ -25,17 +25,3 @@ async function parseSuccess() {
 
   console.log(JSON.stringify(ast, null, 2))
 }
-
-async function parseError() {
-  const schema = /* prisma */ `
-
-    datasource db {
-      provider
-      url = "postgres://jkomyno:prisma@localhost:5432"
-    }
-  
-  `
-
-  console.info('Parsing schema...\n')
-  parseSchema(schema)
-}

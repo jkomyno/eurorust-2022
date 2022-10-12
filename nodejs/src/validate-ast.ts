@@ -1,9 +1,17 @@
+import { match } from 'ts-pattern'
 import { parseSchema, validateAST } from './wasm/schema_parser_wasm'
 import type { SchemaAST } from './wasm/schema_parser_wasm'
 import { displayError } from './utils/displayError'
 
 async function main() {
-  await validateSuccess()
+  // @ts-ignore
+  await match(process.argv[2])
+    .with('success', validateSuccess)
+    .with('error', validateError)
+    .with('panic', validatePanic)
+    .otherwise(() => {
+      console.error('Please specify a valid demo: success, error, panic')
+    })
 }
 
 main()
@@ -27,7 +35,11 @@ async function validateSuccess() {
   console.info('AST validated successfully!')
 }
 
-async function validateFailure() {
+// This throws an error because:
+// - more than one datasource is provided
+// - the cockroachdb provider is not supported
+// - the url for postgres doesn't start with the "postgres://" protocol
+async function validateError() {
   const schema = /* prisma */ `
 
     datasource db {
@@ -50,6 +62,8 @@ async function validateFailure() {
   console.info('AST validated successfully!')
 }
 
+// This panics because:
+// - env urls are not supported
 async function validatePanic() {
   const schema = /* prisma */ `
 
