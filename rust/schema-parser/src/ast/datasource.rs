@@ -8,7 +8,7 @@ use tsify::Tsify;
 use wasm_bindgen::prelude::*;
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
+#[serde(rename_all = "camelCase", tag = "kind", content = "value")]
 #[cfg_attr(feature = "wasm", derive(Tsify), tsify(into_wasm_abi, from_wasm_abi))]
 pub enum Datasource {
   Db(DatasourceDb),
