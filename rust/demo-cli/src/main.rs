@@ -57,14 +57,13 @@ fn handle_parse_cmd(cmd: ParseCmd) -> std::io::Result<()> {
   }
 
   let schema_contents = schema_contents.unwrap();
-  println!("schema_contents:\n{}\n", schema_contents);
 
-  /*
-  let schema = parse_schema(schema_contents);
+  println!("Parsing schema...");
+  let schema = schema_parser::parse_schema(schema_contents);
+  println!("Schema parsed successfully!\n");
 
   let schema = schema.unwrap();
-  println!("schema:\n{:?}\n", schema);
-  */
+  println!("{:#?}", schema);
 
   Ok(())
 }

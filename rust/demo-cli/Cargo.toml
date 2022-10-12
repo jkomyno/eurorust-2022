@@ -12,3 +12,4 @@ clap = { version = "3.2.22", features = ["derive", "suggestions"] }
 demo-panic = { path = "../demo-panic", features = [] }
 demo-serde-wasm = { path = "../demo-serde-wasm" }
 demo-tsify-wasm = { path = "../demo-tsify-wasm" }
+schema-parser = { path = "../schema-parser" }
