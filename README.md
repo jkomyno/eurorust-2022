@@ -8,6 +8,8 @@
   </a>
 </p>
 
+Slides for this talk are also available [here](http://jkomyno-eurorust-2022.vercel.app/).
+
 ## Abstract
 
 Although Rust code can supposedly run in JS runtimes via WebAssembly, concepts like serialization, panic handling, and type-safety aren’t supported out of the box. Using a parser written in Rust and consumed by Node.js, we’ll discuss limitations and alternatives to guide you through a Wasm project.
