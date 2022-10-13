@@ -1,6 +1,6 @@
 use wasm_bindgen::prelude::*;
 
-// requires manual implementation of wasm_bindgen::JsCast
+#[wasm_bindgen]
 pub struct Foo {
   pub id: u32,
 }
