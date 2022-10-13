@@ -26,7 +26,7 @@ In this presentation, we will look at a language parser written in Rust, compile
 ### Install Dependencies
 
 - `cargo update -p wasm-bindgen`
-- `cargo install -f wasm-bindgen-cli@0.2.83` (this version is important, as `wasm-bindgen-cli` doesn't yet follow semantic versioning. This version needs to match the version of the `wasm-bindgen` crate`)
+- `cargo install -f wasm-bindgen-cli@0.2.83` (the version is important, as `wasm-bindgen-cli` doesn't yet follow semantic versioning. This version needs to match the version of the `wasm-bindgen` crate`)
 
 In [`./nodejs`](./nodejs):
 
@@ -239,7 +239,7 @@ Let's now see how the same logic works in Node.js when imported via WebAssembly.
 
 ### Schema parsing/validation in Node.js via Wasm
 
-- cd `./rust`
+- cd `./nodejs`
 - Parse a predefined schema defined as
 
 ```prisma
