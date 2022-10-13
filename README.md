@@ -375,7 +375,7 @@ As we can see, we lose information on the original message passed to `panic!`, a
 **Alberto Schiabel**
 
 * Twitter: [@jkomyno](https://twitter.com/jkomyno)
-* Twitter: [@jkomyno](https://github.com/jkomyno)
+* Github: [@jkomyno](https://github.com/jkomyno)
 
 ## 📝 License
 
