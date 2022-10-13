@@ -6,6 +6,7 @@ use tsify::Tsify;
 #[cfg(feature = "wasm")]
 use wasm_bindgen::prelude::*;
 
+#[cfg_attr(feature = "wasm", tsify::declare)]
 type DatamodelError = String;
 
 /// Represents a list of validation or parser errors.
