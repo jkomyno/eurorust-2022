@@ -10,7 +10,8 @@ pub fn example_schema_wasm() -> Result<SchemaAST, JsError> {
 
 #[wasm_bindgen(js_name = parseSchema)]
 pub fn parse_schema_wasm(input: String) -> Result<SchemaAST, JsError> {
-  schema_parser::parse_schema(input).map_err(|err| to_js_error(&err))
+  let ast_result: Result<SchemaAST, String> = schema_parser::parse_schema(input);
+  ast_result.map_err(|err| to_js_error(&err))
 }
 
 #[wasm_bindgen(js_name = validateAST)]
